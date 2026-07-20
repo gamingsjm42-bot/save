@@ -54,13 +54,13 @@ const char* toStr(int number)
     //set int('l')to l
     auto intToChar= [](int num) {return char(num-int('0'));};
     //get len
-    auto len = [](int num){int returning ;while(abs(num)>1)returning/=10;return returning;};
+    auto len = [](int num){int returning =num;while(abs(num)>1)returning/=10;return returning;};
     //set last element fn
     auto getLastElemnt = [&len](int num){num/=pow(10,len(num));return num;};
     //fix-
     if(number<0) returning+='-';
     //set str
-    for (size_t i = 0; i < len(number); i++)
+    for (int i = 0; i < len(number); i++)
     {
         //add 'last' char
         returning+= intToChar(getLastElemnt(number));
@@ -102,11 +102,11 @@ double strTo(const char* number,double)
     auto __strTo = [](const char i){if(i==',') return 0;return int(i-int('0'));};
     //set comma find
     size_t findComma= 0;
-    for (size_t i = 0; i < sizeof(number)/sizeof(const char); i++) if(number[i]==',') findComma=i;
+    for (size_t i = 0; i < int(sizeof(number))/int(sizeof(const char)); i++) if(number[i]==',') findComma=i;
     //set returning var
     int returning=0;
     //add returning char by char
-    for (size_t i = loopBegin; i < sizeof(number)/sizeof(const char); i++) returning+=pow(10,i-findComma)*(__strTo(number[i])) ;
+    for (size_t i = loopBegin; i < int(sizeof(number))/int(sizeof(const char)); i++) returning+=pow(10,i-findComma)*(__strTo(number[i])) ;
     //fix -
     if(loopBegin) returning*=-1;
     //return
